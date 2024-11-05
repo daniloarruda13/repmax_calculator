@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1RM Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        #result-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2196F3;
+            margin-top: 15px;
+        }
+        .description, .formula, .reference {
+            text-align: left;
+            font-size: 14px;
+            color: #555;
+            margin-top: 15px;
+        }
+        .formula code {
+            background-color: #f9f9f9;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>1RM Calculator</h2>
+        <p class="description">Estimate your one-repetition maximum (1RM) based on the weight and reps performed.</p>
+        
+        <form method="post">
+            <label for="unit">Weight Unit:</label>
+            <select id="unit" name="unit">
+                <option value="lbs" {% if unit == 'lbs' %}selected{% endif %}>lbs</option>
+                <option value="kg" {% if unit == 'kg' %}selected{% endif %}>kg</option>
+            </select>
+            
+            <label for="weight">Weight:</label>
+            <input type="number" id="weight" name="weight" step="0.1" min="1" required>
+            
+            <label for="reps">Number of Repetitions Performed:</label>
+            <input type="number" id="reps" name="reps" min="1" max="10" required>
+            
+            <button type="submit">Calculate 1RM</button>
+        </form>
+        
+        {% if rm is not none %}
+            <h3>Estimated One-Repetition Maximum (1RM):</h3>
+            <div id="result-text">{{ rm }} {{ unit }}</div>
+        {% endif %}
+        
+        <hr>
+        <p class="formula">Note: The formula used to calculate 1RM is based on Brzycki’s equation:</p>
+        <p class="formula"><code>1RM = Weight / (1.0278 - 0.0278 * Repetitions)</code></p>
+        <p class="reference"><em>Reference: Brzycki, M. (1993). Strength testing—predicting a one-rep max from reps-to-fatigue. Journal of Physical Education, Recreation & Dance, 64(1), 88-90.</em></p>
+    </div>
+</body>
+</html>
