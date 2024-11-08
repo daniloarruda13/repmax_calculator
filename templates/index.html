@@ -11,8 +11,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
             margin: 0;
+            padding: 20px 0; /* Adds 20px space on top and bottom */
         }
         .container {
             max-width: 400px;
@@ -59,6 +59,19 @@
             padding: 2px 4px;
             border-radius: 4px;
         }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -85,6 +98,24 @@
         {% if rm is not none %}
             <h3>Estimated One-Repetition Maximum (1RM):</h3>
             <div id="result-text">{{ rm }} {{ unit }}</div>
+            
+            <!-- Percentages Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Percentage</th>
+                        <th>Weight ({{ unit }})</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for percentage, weight in percentages %}
+                    <tr>
+                        <td>{{ percentage }}%</td>
+                        <td>{{ weight }} {{ unit }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         {% endif %}
         
         <hr>
