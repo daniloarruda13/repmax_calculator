@@ -32,4 +32,6 @@ def index():
     return render_template("index.html", rm=rm, unit=unit, percentages=percentages)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=8000, ssl_context=(
+ "/etc/letsencrypt/live/traininglab.online/fullchain.pem",
+        "/etc/letsencrypt/live/traininglab.online/privkey.pem"))
